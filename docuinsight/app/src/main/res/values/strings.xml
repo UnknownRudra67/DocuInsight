@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DocuInsight</string>
+    <string name="tagline">AI Document Intelligence &amp; Team Collaboration</string>
+    <string name="sign_in_title">Welcome to DocuInsight</string>
+    <string name="sign_in_desc">Summarize long documents, extract verified citations, and collaborate with your team in real time.</string>
+    <string name="sign_in_button">Sign in with Google</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="tab_documents">Documents</string>
+    <string name="tab_cloud">Cloud Sync</string>
+    <string name="tab_audit">Audit Logs</string>
+    <string name="tab_settings">Security</string>
+    <string name="extract_insights_button">Extract Key Insights</string>
+    <string name="generate_summary_button">Generate AI Summary</string>
+    <string name="ask_ai_hint">Ask a question about this document…</string>
+    <string name="offline_mode_badge">Offline Mode Enabled</string>
+    <string name="online_mode_badge">Cloud Synced</string>
+</resources>

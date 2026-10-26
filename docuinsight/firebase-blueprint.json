@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "Document": {
+      "title": "Document",
+      "description": "Long document with summary, metadata, and team collaboration settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "title": { "type": "string" },
+        "format": { "type": "string", "enum": ["pdf", "docx", "txt"] },
+        "content": { "type": "string" },
+        "pageCount": { "type": "integer" },
+        "wordCount": { "type": "integer" },
+        "summary": { "type": "string" },
+        "summaryStatus": { "type": "string", "enum": ["pending", "processing", "completed", "error"] },
+        "cloudSource": { "type": "string", "enum": ["local", "google_drive", "dropbox"] },
+        "collaborators": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "title", "format", "content", "createdAt", "updatedAt"]
+    },
+    "Insight": {
+      "title": "Insight",
+      "description": "Extracted key insight with verified source citation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "documentId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "collaborators": { "type": "array" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "sourceReference": { "type": "string" },
+        "category": { "type": "string", "enum": ["key_takeaway", "risk", "action_item", "financial", "statistic"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["documentId", "ownerId", "title", "content", "sourceReference", "category", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Live collaborative team comment on document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "documentId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "collaborators": { "type": "array" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "text": { "type": "string" },
+        "quoteReference": { "type": "string" },
+        "resolved": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["documentId", "ownerId", "authorId", "authorName", "text", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Document Q&A chat message",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "documentId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "collaborators": { "type": "array" },
+        "senderId": { "type": "string" },
+        "senderRole": { "type": "string", "enum": ["user", "ai"] },
+        "message": { "type": "string" },
+        "citations": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["documentId", "ownerId", "senderId", "senderRole", "message", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Audit trail log tracking document actions and security compliance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "documentId": { "type": "string" },
+        "documentTitle": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "action", "details", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/documents/{documentId}": {
+      "schema": "Document",
+      "description": "Documents owned by users with collaborative permissions"
+    },
+    "/documents/{documentId}/insights/{insightId}": {
+      "schema": "Insight",
+      "description": "Key insights extracted with source citations"
+    },
+    "/documents/{documentId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Team comments on the document"
+    },
+    "/documents/{documentId}/chatMessages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Interactive Q&A chat messages for the document"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Activity history and compliance audit logs"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "DocuInsight",
+  "description": "AI-powered document summarizer, insight extractor with source citations, interactive chat, collaboration, and offline encryption.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
